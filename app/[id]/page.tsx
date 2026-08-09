@@ -1,15 +1,15 @@
 import Header from "@/components/Header";
-import HomePageClient from "./HomePageClient";
+import AudioPageClient from "./AudioPageClient";
 import Footer from "@/components/Footer";
 
-function HomePage() {
+function page() {
   return (
-    <>
+    <div>
       <Header />
-      <HomePageClient />
+      <AudioPageClient />
       <Footer />
-    </>
+    </div>
   );
 }
 
-export default HomePage;
+export default page;
