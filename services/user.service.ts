@@ -14,6 +14,18 @@ export type PublicAudioSort = "newest" | "updated";
 export type RankingMetric = "listening" | "listened";
 export type RankingPeriod = "today" | "month" | "year" | "all";
 
+export interface UnlockClickResult {
+  deviceId: string;
+  unlocked: boolean;
+  unlockedAt: string;
+  expiresAt: string;
+}
+
+export interface UnlockStatusResult {
+  unlocked: boolean;
+  remainingSeconds: number;
+}
+
 export interface PaginatedAudios {
   items: AudioItem[];
   total: number;
@@ -117,16 +129,19 @@ export function fetchAdLink(): Promise<{ adLinkUrl: string }> {
 }
 
 /** POST /api/unlock/click - ghi nhan mo khoa hom nay cho 1 deviceId */
-export function postUnlockClick(deviceId: string): Promise<void> {
-  return request<void>("/unlock/click", { method: "POST", body: { deviceId } });
+export function postUnlockClick(deviceId: string): Promise<UnlockClickResult> {
+  return request<UnlockClickResult>("/unlock/click", {
+    method: "POST",
+    body: { deviceId },
+  });
 }
 
 /** GET /api/unlock/status - kiem tra hom nay deviceId nay da mo khoa chua */
 export function fetchUnlockStatus(
   deviceId: string,
-): Promise<{ unlocked: boolean }> {
+): Promise<UnlockStatusResult> {
   const query = buildQueryString({ deviceId });
-  return request<{ unlocked: boolean }>(`/unlock/status${query}`);
+  return request<UnlockStatusResult>(`/unlock/status${query}`);
 }
 
 /**
@@ -152,4 +167,33 @@ export function postAudioCompleted(
       method: "POST",
     },
   );
+}
+
+/**
+ * POST /api/public/audios/:id/listen-heartbeat - bao "van dang nghe" cho 1 deviceId.
+ * Goi 1 lan khi bam play, roi lap lai dinh ky (~20s) trong luc audio dang phat.
+ */
+export function postListenHeartbeat(
+  audioId: string,
+  deviceId: string,
+): Promise<{ ok: true }> {
+  return request<{ ok: true }>(`/public/audios/${audioId}/listen-heartbeat`, {
+    method: "POST",
+    body: { deviceId },
+  });
+}
+
+/**
+ * POST /api/public/audios/:id/listen-stop - bao dung nghe NGAY (best-effort).
+ * Goi khi pause/dung/chuyen bai/roi trang. Khong bat buoc phai thanh cong - da co
+ * co che het han heartbeat o backend lam fallback neu request nay khong toi duoc server.
+ */
+export function postListenStop(
+  audioId: string,
+  deviceId: string,
+): Promise<{ ok: true }> {
+  return request<{ ok: true }>(`/public/audios/${audioId}/listen-stop`, {
+    method: "POST",
+    body: { deviceId },
+  });
 }

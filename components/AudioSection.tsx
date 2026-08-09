@@ -55,25 +55,26 @@ function AudioSection(AudioSection: AudioSectionOptions) {
             key={audio.id}
             className="bg-white rounded-xl shrink-0 w-60 p-3 border border-[#F1D6E0] hover:border-[#D6336C] transition duration-400 flex flex-col gap-2 cursor-pointer"
           >
-            <h3 className="font-bold text-xl">{audio.title}</h3>
+            <h3 className="font-bold text-xl truncate">{audio.title}</h3>
             <div className="border px-1 w-fit text-[10px] font-semibold">
               Audio Full
             </div>
             <div className="flex items-center gap-1">
               <Headphones size={15} />
               <span className="text-xs">
-                {audio.totalListened >= 1000
-                  ? `${(audio.totalListened / 1000).toFixed(1)}N`
-                  : audio.totalListened}{" "}
-                lượt nghe
-              </span>
-            </div>
-            <div className="flex items-center gap-1 text-[#D6336C]">
-              <span>●</span>
-              <span className="text-xs">
                 {audio.totalListening >= 1000
                   ? `${(audio.totalListening / 1000).toFixed(1)}N`
                   : audio.totalListening}{" "}
+                lượt nghe
+              </span>
+            </div>
+
+            <div className="flex items-center gap-1 text-[#D6336C]">
+              <span>●</span>
+              <span className="text-xs">
+                {audio.currentListeners >= 1000
+                  ? `${(audio.currentListeners / 1000).toFixed(1)}N`
+                  : audio.currentListeners}{" "}
                 đang nghe
               </span>
             </div>

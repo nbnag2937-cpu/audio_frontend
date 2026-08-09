@@ -16,6 +16,7 @@ export interface AudioItem {
   status: AudioStatus;
   totalListened: number;
   totalListening: number;
+  currentListeners: number;
   createdAt: string;
   parts: AudioPart[];
 }

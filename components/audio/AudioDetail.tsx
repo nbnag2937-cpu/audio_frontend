@@ -29,7 +29,7 @@ export default function AudioDetail({ audio, backHref }: AudioDetailProps) {
 
       <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
         <Stat label="Lượt nghe" value={audio.totalListened} />
-        <Stat label="Đang nghe" value={audio.totalListening} />
+        <Stat label="Đang nghe" value={audio.currentListeners} />
         <Stat label="Số phần" value={audio.parts.length} />
         <Stat
           label="Ngày tạo"

@@ -14,7 +14,10 @@ import {
   playAudioAction,
   checkUnlockStatusAction,
   unlockTodayAction,
-} from "@/actions/user.actions"; // TODO: khớp lại đúng path trong dự án
+  heartbeatListenAction,
+  stopListenAction,
+  completeAudioAction,
+} from "@/actions/user.actions";
 import { ApiRequestError } from "@/lib/api-client";
 import {
   formatDuration,
@@ -32,9 +35,6 @@ interface AudioPageContentProps {
   audioId: string;
 }
 
-// Cac "part" chi la chia lat thoi luong cua CUNG 1 file audio tren R2 (khong phai file rieng).
-// Ham nay tinh moc thoi gian TUYET DOI (trong file that) ma 1 part bat dau, bang tong
-// durationSec cua tat ca cac part dung truoc no.
 function getPartStartOffset(parts: AudioPart[], partIndex: number): number {
   let offset = 0;
   for (let i = 0; i < partIndex; i += 1) {
@@ -49,8 +49,7 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const stopAtPartEndRef = useRef(false);
   const sleepTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  // Theo doi part nao vua duoc "seek" toi, de chi tua lai audio khi THAT SU doi part
-  // (khong tua moi lan bam Phat/Tam dung, vi do se lam mat vi tri dang nghe do dang)
+
   const lastSeekedPartIndexRef = useRef<number | null>(null);
 
   const [audio, setAudio] = useState<AudioItem | null>(null);
@@ -69,18 +68,11 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
   const [sleepLabel, setSleepLabel] = useState<string | null>(null);
   const [isTopSleepMenuOpen, setIsTopSleepMenuOpen] = useState(false);
 
-  // ---- Cac ham lien quan phat audio: PHAI khai bao truoc useEffect ben duoi
-  // vi useEffect goi consumeAutoplayNext() -> requestPlaybackFor ngay trong effect dau tien.
-  // Dat const arrow function sau diem su dung se bi TDZ ("Cannot access before declaration").
-
-  // Goi API /stream de lay audioUrl that roi merge vao audio state.
-  // Nhan audioSnapshot lam tham so de dung duoc ca luc goi tu useEffect (truoc khi
-  // state `audio` cap nhat xong) lan luc goi tu cac handler o duoi.
+  const hasCompletedRef = useRef(false);
   const requestPlaybackFor = async (audioSnapshot: AudioItem) => {
     setStreamError(null);
 
     const currentPart = audioSnapshot.parts[activePartIndex];
-    // Da co audioUrl cho part nay roi (da goi /stream truoc do) -> phat luon, khoi goi lai API
     if (currentPart?.audioUrl) {
       setIsPlaying(true);
       setHasStartedPlayback(true);
@@ -107,8 +99,6 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
     }
   };
 
-  // Kiem tra unlock qua API that (co cache localStorage ben trong checkUnlockStatusAction)
-  // thay vi doc rieng 1 flag localStorage khac khong dong bo voi backend.
   const requestPlayback = async () => {
     if (!audio) return;
 
@@ -120,8 +110,6 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
     void requestPlaybackFor(audio);
   };
 
-  // Chỉ fetch dữ liệu. Không setState reset thủ công — component được
-  // remount qua key={audioId} nên state đã sạch sẵn.
   useEffect(() => {
     let isCancelled = false;
 
@@ -130,8 +118,6 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
       setAudio(result ?? null);
       setIsLoading(false);
       if (result && consumeAutoplayNext()) {
-        // Autoplay khi chuyển bài kế tiếp: vẫn phải đi qua requestPlaybackFor
-        // để lấy audioUrl thật, không set isPlaying trực tiếp ở đây nữa.
         void requestPlaybackFor(result);
       }
     });
@@ -146,10 +132,6 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioId]);
 
-  // Dieu khien play/pause VA tua (seek) toi diem bat dau cua part khi thuc su doi part.
-  // Vi cac part dung chung 1 file audio, doi activePartIndex KHONG lam audioUrl thay doi
-  // (src the <audio> khong doi) nen phai tu tay set currentTime, khong the trong cho
-  // trinh duyet tu load lai nguon nhu file khac nhau.
   useEffect(() => {
     const audioEl = audioRef.current;
     if (!audioEl || !audio) return;
@@ -191,6 +173,28 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    void heartbeatListenAction(audioId);
+    const intervalId = setInterval(() => {
+      void heartbeatListenAction(audioId);
+    }, 20000);
+
+    return () => {
+      clearInterval(intervalId);
+      void stopListenAction(audioId);
+    };
+  }, [isPlaying, audioId]);
+
+  useEffect(() => {
+    const handlePageHide = () => {
+      if (isPlaying) void stopListenAction(audioId);
+    };
+    window.addEventListener("pagehide", handlePageHide);
+    return () => window.removeEventListener("pagehide", handlePageHide);
+  }, [isPlaying, audioId]);
+
   if (isLoading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center bg-[#FFF3F7] text-[black]/60">
@@ -231,15 +235,9 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
   const handlePlayPart = (index: number) => {
     setActivePartIndex(index);
     setCurrentTime(0);
-    // audioUrl cua cac part deu giong nhau (chia lat cung 1 fileKey theo mapper BE),
-    // nen neu audio hien tai da co audioUrl thi khong can goi lai API — effect ben tren
-    // se tu tua toi offset dung cua part moi.
     void requestPlayback();
   };
 
-  // Xu ly khi nguoi nghe het 1 "part": vi cac part chung 1 file, khong the dua vao
-  // su kien 'onEnded' cua the <audio> (chi no khi het TOAN BO file), phai tu tinh
-  // dua vao moc thoi gian tuong doi trong handleTimeUpdate ben duoi.
   const handlePartEnded = () => {
     if (stopAtPartEndRef.current) {
       stopAtPartEndRef.current = false;
@@ -252,12 +250,13 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
       setCurrentTime(0);
     } else {
       setIsPlaying(false);
+      if (!hasCompletedRef.current) {
+        hasCompletedRef.current = true;
+        void completeAudioAction(audioId);
+      }
     }
   };
 
-  // e.currentTarget.currentTime la thoi gian TUYET DOI trong file audio dung chung.
-  // Phai tru di offset cua part hien tai de ra thoi gian TUONG DOI (0..durationSec cua part)
-  // dung cho progress bar, dong thoi phat hien khi da het 1 part de tu chuyen part tiep theo.
   const handleTimeUpdate = (event: React.SyntheticEvent<HTMLAudioElement>) => {
     const absoluteTime = event.currentTarget.currentTime;
     const offset = getPartStartOffset(parts, activePartIndex);
@@ -270,9 +269,6 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
     setCurrentTime(relativeTime);
   };
 
-  // Bam "Mo khoa & nghe" trong modal -> phai goi API that (unlockTodayAction) de backend
-  // ghi UnlockLog cho deviceId hom nay, KHONG chi luu flag localStorage phia client
-  // (neu chi luu local, /stream se van tra UNLOCK_REQUIRED vi backend chua biet gi ca).
   const handleUnlockAd = async () => {
     setIsUnlocking(true);
     setStreamError(null);
@@ -287,8 +283,6 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
     }
   };
 
-  // time truyen vao la thoi gian TUONG DOI trong part hien tai -> phai cong offset
-  // cua part de ra thoi gian tuyet doi that su tua toi trong file.
   const handleSeek = (time: number) => {
     const audioEl = audioRef.current;
     if (!audioEl) return;

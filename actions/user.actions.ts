@@ -1,20 +1,3 @@
-"use client";
-
-/**
- * user.actions.ts
- * Tang ACTION cho role USER. UI chi duoc goi cac ham trong file nay (KHONG goi thang user.service.ts).
- *
- * Vi sao la "use client" thay vi Next.js Server Action ("use server")?
- * -> deviceId phai luu trong LOCALSTORAGE (chi ton tai o trinh duyet), Server Action chay tren server
- *    nen KHONG the doc/ghi localStorage. Vi vay nhom action nay la ham client thuong, UI (Client Component)
- *    goi truc tiep, khong phai qua co che <form action={...}> cua Server Action.
- *
- * localStorage keys su dung:
- *   - "music_device_id"    : UUID dinh danh thiet bi, tao 1 lan duy nhat, dung mai ve sau
- *   - "music_unlock_date"  : ngay (YYYY-MM-DD) gan nhat da xac nhan mo khoa thanh cong,
- *                            dung de CACHE, tranh phai goi API kiem tra unlock moi lan vao trang
- */
-
 import {
   fetchAdLink,
   fetchPublicAudioDetail,
@@ -23,6 +6,8 @@ import {
   fetchStreamAudio,
   fetchUnlockStatus,
   postAudioCompleted,
+  postListenHeartbeat,
+  postListenStop,
   postUnlockClick,
   type PaginatedAudios,
   type PublicAudioSort,
@@ -34,17 +19,8 @@ import { ApiRequestError } from "@/lib/api-client";
 import { AudioItem } from "@/types/audio";
 
 const DEVICE_ID_KEY = "music_device_id";
-const UNLOCK_DATE_CACHE_KEY = "music_unlock_date";
+const UNLOCK_EXPIRES_CACHE_KEY = "music_unlock_expires_at";
 
-/** Tra ve ngay hien tai dang YYYY-MM-DD theo UTC - PHAI khop cach tinh ngay ben backend */
-function getTodayDateKeyUTC(): string {
-  return new Date().toISOString().slice(0, 10);
-}
-
-/**
- * Lay deviceId trong localStorage, neu chua co thi tu tao 1 UUID moi va luu lai.
- * Goi ham nay o dau moi action can deviceId - khong can UI tu quan ly.
- */
 export function getOrCreateDeviceId(): string {
   const existing = window.localStorage.getItem(DEVICE_ID_KEY);
   if (existing) return existing;
@@ -110,69 +86,65 @@ export async function getAdLinkAction(): Promise<string> {
   return adLinkUrl;
 }
 
-/**
- * Action: goi SAU KHI nguoi dung da bam vao link quang cao (vd: sau khi tab quang cao duoc mo).
- * Ghi nhan mo khoa cho hom nay tren server, dong thoi cache lai ngay hom nay vao localStorage
- * de cac lan check unlock tiep theo trong ngay khong can goi API nua.
- */
 export async function unlockTodayAction(): Promise<void> {
   const deviceId = getOrCreateDeviceId();
-  await postUnlockClick(deviceId);
-  window.localStorage.setItem(UNLOCK_DATE_CACHE_KEY, getTodayDateKeyUTC());
+  const { expiresAt } = await postUnlockClick(deviceId);
+  window.localStorage.setItem(UNLOCK_EXPIRES_CACHE_KEY, expiresAt);
 }
 
-/**
- * Action: kiem tra hom nay da mo khoa chua.
- * Uu tien doc cache trong localStorage truoc (nhanh, khong goi API);
- * chi goi API that su khi chua co cache hoac cache la cua ngay khac (hom qua).
- */
 export async function checkUnlockStatusAction(): Promise<boolean> {
-  const today = getTodayDateKeyUTC();
-  const cachedDate = window.localStorage.getItem(UNLOCK_DATE_CACHE_KEY);
-  if (cachedDate === today) return true;
+  const cachedExpiresAt = window.localStorage.getItem(UNLOCK_EXPIRES_CACHE_KEY);
+  if (cachedExpiresAt && Date.now() < new Date(cachedExpiresAt).getTime()) {
+    return true;
+  }
 
   const deviceId = getOrCreateDeviceId();
-  const { unlocked } = await fetchUnlockStatus(deviceId);
+  const { unlocked, remainingSeconds } = await fetchUnlockStatus(deviceId);
   if (unlocked) {
-    window.localStorage.setItem(UNLOCK_DATE_CACHE_KEY, today);
+    const expiresAt = new Date(
+      Date.now() + remainingSeconds * 1000,
+    ).toISOString();
+    window.localStorage.setItem(UNLOCK_EXPIRES_CACHE_KEY, expiresAt);
+  } else {
+    window.localStorage.removeItem(UNLOCK_EXPIRES_CACHE_KEY);
   }
   return unlocked;
 }
 
-/**
- * Action: phat 1 audio - tra ve AudioItem kem parts co audioUrl.
- * Neu chua mo khoa hom nay, backend tra ve loi code "UNLOCK_REQUIRED" -> action nem lai loi nay
- * (giu nguyen ApiRequestError) de UI bat va hien lai nut quang cao thay vi phat nhac.
- *
- * Vi du dung trong Client Component:
- *   try {
- *     const audio = await playAudioAction(id);
- *     // phat audio.parts[0].audioUrl ...
- *   } catch (err) {
- *     if (err instanceof ApiRequestError && err.code === "UNLOCK_REQUIRED") {
- *       // hien modal/nut "Xem quang cao de mo khoa"
- *     }
- *   }
- */
 export async function playAudioAction(audioId: string): Promise<AudioItem> {
   const deviceId = getOrCreateDeviceId();
   try {
-    const audio = await fetchStreamAudio(audioId, deviceId);
-    // Goi thanh cong nghia la chac chan da unlock -> cap nhat luon cache cho chac
-    window.localStorage.setItem(UNLOCK_DATE_CACHE_KEY, getTodayDateKeyUTC());
-    return audio;
+    return await fetchStreamAudio(audioId, deviceId);
   } catch (error) {
-    // Backend noi chua unlock (vd: cache localStorage cu, hoac sang ngay moi) -> xoa cache cho dong bo
+    // Backend noi chua/het unlock -> xoa cache cho dong bo, lan check tiep theo se goi API that
     if (error instanceof ApiRequestError && error.code === "UNLOCK_REQUIRED") {
-      window.localStorage.removeItem(UNLOCK_DATE_CACHE_KEY);
+      window.localStorage.removeItem(UNLOCK_EXPIRES_CACHE_KEY);
     }
     throw error;
   }
 }
 
-/** Action: bao da nghe het 1 audio (goi luc bat su kien "ended" cua the <audio>/<video>) */
 export async function completeAudioAction(
   audioId: string,
 ): Promise<{ id: string; totalListened: number }> {
   return postAudioCompleted(audioId);
+}
+
+export async function heartbeatListenAction(audioId: string): Promise<void> {
+  const deviceId = getOrCreateDeviceId();
+  try {
+    await postListenHeartbeat(audioId, deviceId);
+  } catch {
+    // Khong throw - heartbeat that bai 1 nhip khong nghiem trong, backend se tu coi la
+    // "het han dang nghe" sau ~45s neu heartbeat tiep tuc that bai lien tuc.
+  }
+}
+
+export async function stopListenAction(audioId: string): Promise<void> {
+  const deviceId = getOrCreateDeviceId();
+  try {
+    await postListenStop(audioId, deviceId);
+  } catch {
+    // Best-effort - khong throw len UI, khong lam gian doan trai nghiem nguoi dung.
+  }
 }
