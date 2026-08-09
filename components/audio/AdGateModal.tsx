@@ -48,18 +48,18 @@ function AdGateModal({ shopeeUrl, onUnlock, onClose }: AdGateModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0D241F]/70 px-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#2B0A18]/60 px-4">
       <div className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl bg-white p-5 shadow-xl scrollbar-hide">
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 cursor-pointer text-[#0D241F]/50 hover:text-[#0D241F]"
+          className="absolute right-4 top-4 cursor-pointer text-black/40 hover:text-black"
           aria-label="Đóng"
         >
           ✕
         </button>
 
-        <p className="pr-6 text-center text-lg font-bold text-[#0D241F]">
+        <p className="pr-6 text-center text-lg font-bold text-black">
           Mời bạn CLICK vào liên kết bên dưới và Mở Ứng Dụng Shopee để mở khóa
           audio!
         </p>
@@ -68,7 +68,7 @@ function AdGateModal({ shopeeUrl, onUnlock, onClose }: AdGateModalProps) {
           href={shopeeUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 block truncate rounded-full border border-[#24453D]/20 bg-[#F0FDF4] px-4 py-2 text-center text-sm text-[#0D241F] hover:bg-[#6ac1ab]/15"
+          className="mt-4 block truncate rounded-full border border-[#F1D6E0]/40 bg-[#7A1140] px-4 py-2 text-center text-sm text-white hover:bg-[#D6336C]/90"
         >
           › {shopeeUrl}
         </a>
@@ -78,9 +78,9 @@ function AdGateModal({ shopeeUrl, onUnlock, onClose }: AdGateModalProps) {
           href={shopeeUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 block overflow-hidden rounded-xl border border-[#24453D]/10 hover:opacity-95"
+          className="mt-4 block overflow-hidden rounded-xl border border-[#F1D6E0]/60 hover:opacity-95"
         >
-          <div className="relative flex h-44 items-center justify-center bg-linear-to-br from-[#F0FDF4] to-[#6ac1ab]/30 text-sm text-[#0D241F]/50">
+          <div className="relative flex h-44 items-center justify-center bg-linear-to-br from-[#7A1140] to-[#D6336C]/40 text-sm text-white/70">
             {isLoadingImage ? (
               <span className="animate-pulse">Đang tải xem trước...</span>
             ) : imageUrl ? (
@@ -96,18 +96,18 @@ function AdGateModal({ shopeeUrl, onUnlock, onClose }: AdGateModalProps) {
           </div>
         </a>
 
-        <p className="mt-4 text-center text-sm text-[#0D241F]/70">
+        <p className="mt-4 text-center text-sm text-black/60">
           Quảng cáo giúp Yêu Đời Audio luôn miễn phí — mở khóa là nghe được
           ngay.
         </p>
 
-        <div className="mt-3 rounded-xl border border-[#6ac1ab]/40 bg-[#6ac1ab]/10 p-3 text-sm text-[#0D241F]">
+        <div className="mt-3 rounded-xl border border-[#D6336C]/30 bg-[#D6336C]/10 p-3 text-sm text-black">
           <p>
             Bấm{" "}
             <span className="font-bold">&quot;Mở khóa &amp; nghe&quot;</span> là
             audio <span className="font-bold">tự phát ngay</span>.
           </p>
-          <p className="text-[#0D241F]/70">
+          <p className="text-black/60">
             Chưa phát? Quay lại bấm nút Phát là được.
           </p>
         </div>
@@ -115,12 +115,12 @@ function AdGateModal({ shopeeUrl, onUnlock, onClose }: AdGateModalProps) {
         <button
           type="button"
           onClick={handleUnlock}
-          className="mt-4 w-full cursor-pointer rounded-lg bg-[#6ac1ab] py-3 font-bold text-[#0D241F] hover:bg-[#57ad98]"
+          className="mt-4 w-full cursor-pointer rounded-lg bg-[#D6336C] py-3 font-bold text-white hover:bg-[#AD1457]"
         >
           Mở khóa &amp; nghe
         </button>
 
-        <p className="mt-3 text-center text-xs text-[#0D241F]/50">
+        <p className="mt-3 text-center text-xs text-black/50">
           Lưu ý: Quảng Cáo trên chỉ xuất hiện 1 lần trong ngày, mong Quý độc giả
           ủng hộ.
         </p>

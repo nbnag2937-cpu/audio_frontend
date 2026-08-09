@@ -61,11 +61,6 @@ function HomePageClient() {
   }, []);
 
   useEffect(() => {
-    // Day la pattern fetch-on-mount chuan (dong bo du lieu voi API ben
-    // ngoai khi component mount). Rule set-state-in-effect flag moi
-    // setState nam ngoai callback .then/.catch theo cu phap, khong phan
-    // tich duoc dieu kien runtime, nen khong the "sua" bang cach tai cau
-    // truc ma khong doi UX loading. Tat rule co chu dich cho dong nay.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     loadHomeData();
   }, [loadHomeData]);
@@ -78,22 +73,13 @@ function HomePageClient() {
     return () => clearTimeout(timeoutId);
   }, [query]);
 
-  // Goi API tim kiem moi khi debouncedQuery doi (thay vi loc mang local nhu ban cu)
   useEffect(() => {
     if (!debouncedQuery) {
-      // Khong can setSearchResults([]) o day: khi debouncedQuery rong thi
-      // hasQuery cung false -> showDropdown false -> ket qua cu (neu con)
-      // khong hien thi tren UI.
       return;
     }
 
     let cancelled = false;
-    // Can bat co loading TRUOC khi goi API de UI hien "Dang tim kiem..."
-    // ngay, day la pattern chuan cho debounced search. Rule flag moi
-    // setState nam ngoai .then/.catch theo cu phap nen khong the tranh
-    // duoc bang cach doi vi tri ma khong lam vo UX (vi du doi
-    // setSearchLoading vao trong .then se lam mat trang thai loading
-    // trong luc cho ket qua). Tat rule co chu dich cho dong nay.
+
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setSearchLoading(true);
 
@@ -158,15 +144,15 @@ function HomePageClient() {
 
   if (loadError) {
     return (
-      <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3 bg-[#0D241F] px-4 text-center text-[#F0FDF4]">
+      <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3 bg-[#FFF3F7] px-4 text-center text-[black]">
         <p className="text-lg font-semibold">Không thể tải trang</p>
-        <p className="text-sm text-[#F0FDF4]/60">
+        <p className="text-sm text-[black]/60">
           Đã có lỗi xảy ra khi tải danh sách audio. Vui lòng thử lại.
         </p>
         <button
           type="button"
           onClick={loadHomeData}
-          className="mt-2 rounded-lg bg-[#6ac1ab] px-4 py-2 text-sm font-semibold text-[#0D241F] hover:opacity-90"
+          className="mt-2 rounded-lg bg-[#D6336C] px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
         >
           Thử lại
         </button>
@@ -175,7 +161,7 @@ function HomePageClient() {
   }
 
   return (
-    <div className="bg-[#0D241F] border-y border-[#24453D] text-[#F0FDF4]">
+    <div className="bg-[#FFF3F7] border-y border-[#F1D6E0] text-[black]">
       <div className="mx-auto flex w-full max-w-360 flex-col gap-5 px-4 py-5 sm:px-6 md:px-8 lg:px-20 xl:px-60">
         <div>
           <h1 className="text-3xl font-bold pb-2">Nghe gì hôm nay?</h1>
@@ -209,9 +195,9 @@ function HomePageClient() {
           )}
 
           {showDropdown && (
-            <div className="absolute z-20 mt-2 w-full overflow-hidden rounded-xl border border-white/10 bg-[#0D241F] shadow-lg">
+            <div className="absolute z-20 mt-2 w-full overflow-hidden rounded-xl border border-[#F1D6E0] bg-white shadow-lg">
               {isDebouncePending || searchLoading ? (
-                <p className="px-4 py-3 text-sm text-[#F0FDF4]/60">
+                <p className="px-4 py-3 text-sm text-[black]/60">
                   Đang tìm kiếm...
                 </p>
               ) : searchResults.length > 0 ? (
@@ -221,16 +207,16 @@ function HomePageClient() {
                       <Link
                         href={`/${audio.id}`}
                         onClick={handleSelectResult}
-                        className="flex cursor-pointer items-center gap-3 px-4 py-2.5 hover:bg-white/5"
+                        className="flex cursor-pointer items-center gap-3 px-4 py-2.5 hover:bg-[#D6336C]/5"
                       >
-                        <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#6ac1ab]/15 text-[#6ac1ab]">
+                        <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#D6336C]/12 text-[#D6336C]">
                           <Headphones size={16} />
                         </div>
                         <div className="flex min-w-0 flex-col">
-                          <span className="truncate text-sm font-medium text-[#F0FDF4]">
+                          <span className="truncate text-sm font-medium text-[black]">
                             {audio.title}
                           </span>
-                          <span className="text-xs text-[#F0FDF4]/50">
+                          <span className="text-xs text-[black]/50">
                             {formatListenCount(audio.totalListened)} lượt nghe
                           </span>
                         </div>
@@ -239,7 +225,7 @@ function HomePageClient() {
                   ))}
                 </ul>
               ) : (
-                <p className="px-4 py-3 text-sm text-[#F0FDF4]/60">
+                <p className="px-4 py-3 text-sm text-[black]/60">
                   Không tìm thấy audio nào phù hợp.
                 </p>
               )}
@@ -248,7 +234,7 @@ function HomePageClient() {
         </div>
 
         {loading ? (
-          <p className="py-10 text-center text-sm text-[#F0FDF4]/60">
+          <p className="py-10 text-center text-sm text-[black]/60">
             Đang tải...
           </p>
         ) : (

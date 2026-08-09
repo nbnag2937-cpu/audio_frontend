@@ -1,6 +1,6 @@
 function HomeLoadingSkeleton() {
   return (
-    <div className="min-h-screen bg-[#0D241F] pb-28">
+    <div className="min-h-screen bg-[#FFEAF2] pb-28">
       <div className="mx-auto w-full max-w-360 px-4 py-6 sm:px-6 md:px-8 lg:px-20 xl:px-70">
         <div className="mb-6 flex flex-col gap-2">
           <div className="h-8 w-48 animate-pulse rounded bg-white/10 sm:h-9 sm:w-64" />

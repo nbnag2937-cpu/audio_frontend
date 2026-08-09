@@ -27,13 +27,13 @@ function RecommendedList({ items }: RecommendedListProps) {
   return (
     <section className="mt-8">
       <div className="mb-3 flex items-center justify-between">
-        <h2 className="text-lg font-bold text-[#F0FDF4]">Có lẽ bạn sẽ thích</h2>
+        <h2 className="text-lg font-bold text-black">Có lẽ bạn sẽ thích</h2>
         <div className="ts-scroll-btn flex items-center gap-2">
           <Button
             onClick={() => {
               scroll("left");
             }}
-            className="rounded-full bg-[#071A16] hover:bg-[#12302A] hover:border-[#24453D] duration-300 transition hover:scale-110  w-10 h-10 cursor-pointer"
+            className="rounded-full bg-[#FFEAF1] hover:bg-white hover:border-[#F1D6E0] duration-300 transition hover:scale-110  w-10 h-10 cursor-pointer"
           >
             <ChevronLeft />
           </Button>
@@ -41,7 +41,7 @@ function RecommendedList({ items }: RecommendedListProps) {
             onClick={() => {
               scroll("right");
             }}
-            className="rounded-full bg-[#071A16] hover:bg-[#12302A] hover:border-[#24453D] duration-300 transition hover:scale-110 w-10 h-10 cursor-pointer"
+            className="rounded-full bg-[#FFEAF1] hover:bg-white hover:border-[#F1D6E0] duration-300 transition hover:scale-110 w-10 h-10 cursor-pointer"
           >
             <ChevronRight />
           </Button>
@@ -55,20 +55,20 @@ function RecommendedList({ items }: RecommendedListProps) {
           <Link
             key={item.id}
             href={`/${item.id}`}
-            className="min-w-55 shrink-0 cursor-pointer rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10"
+            className="min-w-55 shrink-0 cursor-pointer rounded-xl border border-[#F1D6E0] bg-white p-4 transition hover:bg-[#D6336C]/5"
           >
-            <span className="rounded-md border border-white/20 px-2 py-0.5 text-xs text-[#F0FDF4]/80">
+            <span className="rounded-md border border-[#F1D6E0] px-2 py-0.5 text-xs text-black/80">
               Audio Full
             </span>
-            <h3 className="mt-2 line-clamp-2 font-semibold text-[#F0FDF4]">
+            <h3 className="mt-2 line-clamp-2 font-semibold text-black">
               {item.title}
             </h3>
-            <div className="mt-2 flex items-center gap-1 text-xs text-[#F0FDF4]/60">
+            <div className="mt-2 flex items-center gap-1 text-xs text-black/60">
               <Headphones size={14} />
               {formatListenCount(item.totalListened)} lượt nghe
             </div>
-            <div className="mt-1 flex items-center gap-1 text-xs text-[#6ac1ab]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#6ac1ab]" />
+            <div className="mt-1 flex items-center gap-1 text-xs text-[#D6336C]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#D6336C]" />
               {item.totalListening} đang nghe
             </div>
           </Link>

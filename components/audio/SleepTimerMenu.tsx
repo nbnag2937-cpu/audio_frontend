@@ -23,18 +23,16 @@ function SleepTimerMenu({
 
   return (
     <div
-      className={`absolute right-0 ${positionClass} z-10 w-56 rounded-xl border border-white/10 bg-[#0D241F] p-4 shadow-lg sm:w-64`}
+      className={`absolute right-0 ${positionClass} z-10 w-56 rounded-xl border border-[#F1D6E0] bg-white p-4 shadow-lg sm:w-64`}
     >
-      <p className="mb-3 text-sm font-semibold text-[#F0FDF4]">
-        Hẹn giờ đi ngủ
-      </p>
+      <p className="mb-3 text-sm font-semibold text-black">Hẹn giờ đi ngủ</p>
       <div className="grid grid-cols-2 gap-2">
         {SLEEP_OPTIONS.map((option) => (
           <button
             key={option.minutes}
             type="button"
             onClick={() => onSelectMinutes(option.minutes)}
-            className="cursor-pointer rounded-lg border border-white/10 px-3 py-2 text-sm text-[#F0FDF4] hover:bg-white/10"
+            className="cursor-pointer rounded-lg border border-[#F1D6E0] px-3 py-2 text-sm text-black hover:bg-[#D6336C]/8"
           >
             {option.label}
           </button>
@@ -43,7 +41,7 @@ function SleepTimerMenu({
       <button
         type="button"
         onClick={onSelectEndOfTrack}
-        className="mt-2 w-full cursor-pointer rounded-lg border border-white/10 px-3 py-2 text-sm text-[#F0FDF4] hover:bg-white/10"
+        className="mt-2 w-full cursor-pointer rounded-lg border border-[#F1D6E0] px-3 py-2 text-sm text-black hover:bg-[#D6336C]/8"
       >
         Hết bài này
       </button>

@@ -193,7 +193,7 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-[60vh] items-center justify-center bg-[#0D241F] text-[#F0FDF4]/60">
+      <div className="flex min-h-[60vh] items-center justify-center bg-[#FFF3F7] text-[black]/60">
         Đang tải audio...
       </div>
     );
@@ -201,11 +201,11 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
 
   if (!audio) {
     return (
-      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3 bg-[#0D241F] text-[#F0FDF4]">
+      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3 bg-[#FFF3F7] text-[black]">
         <p>Không tìm thấy audio.</p>
         <Link
           href="/"
-          className="cursor-pointer text-[#6ac1ab] hover:underline"
+          className="cursor-pointer text-[#D6336C] hover:underline"
         >
           ← Quay lại trang chủ
         </Link>
@@ -342,7 +342,7 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
   }`;
 
   return (
-    <div className="min-h-screen bg-[#0D241F] pb-28">
+    <div className="min-h-screen bg-[#FFF3F7] pb-28">
       <audio
         ref={audioRef}
         src={activePart.audioUrl}
@@ -362,46 +362,46 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="mb-4 cursor-pointer text-sm text-[#F0FDF4]/70 hover:text-[#F0FDF4]"
+          className="mb-4 cursor-pointer text-sm text-[black]/70 hover:text-[black]"
         >
           ← Quay lại
         </button>
 
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6">
+        <div className="rounded-2xl border border-[#F1D6E0] bg-white/70 p-5 sm:p-6">
           <div className="flex flex-col gap-5 sm:flex-row">
-            <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-xl bg-[#6ac1ab]/15">
-              <div className="flex h-full items-center justify-center text-[#6ac1ab]">
+            <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-xl bg-[#D6336C]/12">
+              <div className="flex h-full items-center justify-center text-[#D6336C]">
                 <Headphones size={32} />
               </div>
-              <span className="absolute bottom-1 right-1 rounded bg-[#0D241F]/80 px-1.5 py-0.5 text-xs text-[#F0FDF4]">
+              <span className="absolute bottom-1 right-1 rounded bg-[#FFF3F7]/80 px-1.5 py-0.5 text-xs text-[black]">
                 {formatDuration(totalDurationSec)}
               </span>
             </div>
 
             <div className="flex flex-1 flex-col gap-2">
-              <h1 className="text-2xl font-bold text-[#F0FDF4] sm:text-3xl">
+              <h1 className="text-2xl font-bold text-[black] sm:text-3xl">
                 {audio.title}
               </h1>
 
               <div className="flex flex-wrap items-center gap-2 text-sm">
-                <span className="rounded-md border border-white/20 px-2 py-0.5 font-mono text-xs text-[#F0FDF4]/80">
+                <span className="rounded-md border border-[#F1D6E0] px-2 py-0.5 font-mono text-xs text-[black]/80">
                   Audio Full
                 </span>
-                <span className="rounded-full bg-[#6ac1ab]/15 px-2 py-0.5 text-xs text-[#6ac1ab]">
+                <span className="rounded-full bg-[#D6336C]/12 px-2 py-0.5 text-xs text-[#D6336C]">
                   {audio.status === "ready" ? "sẵn sàng" : "đang xử lý"}
                 </span>
-                <span className="flex items-center gap-1 text-[#F0FDF4]/60">
+                <span className="flex items-center gap-1 text-[black]/60">
                   <Headphones size={14} />
                   {formatListenCount(audio.totalListened)} lượt nghe
                 </span>
               </div>
 
-              <span className="text-sm text-[#F0FDF4]/50">
+              <span className="text-sm text-[black]/50">
                 {formatVietnameseDate(audio.createdAt)}
               </span>
 
               {streamError && (
-                <span className="text-sm text-red-400">{streamError}</span>
+                <span className="text-sm text-red-500">{streamError}</span>
               )}
 
               <div className="mt-2 flex flex-wrap gap-3">
@@ -409,7 +409,7 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
                   type="button"
                   onClick={handleTogglePlay}
                   disabled={isStreamLoading}
-                  className="flex cursor-pointer items-center gap-2 rounded-lg bg-[#6ac1ab] px-5 py-2.5 font-semibold text-[#0D241F] hover:bg-[#57ad98] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="flex cursor-pointer items-center gap-2 rounded-lg bg-[#D6336C] px-5 py-2.5 font-semibold text-white hover:bg-[#AD1457] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {isPlaying ? <Pause size={18} /> : <Play size={18} />}
                   {isStreamLoading
@@ -423,7 +423,7 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
                   <button
                     type="button"
                     onClick={() => setIsTopSleepMenuOpen((open) => !open)}
-                    className="flex cursor-pointer items-center gap-2 rounded-lg border border-white/15 px-4 py-2.5 text-[#F0FDF4] hover:bg-white/10"
+                    className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#F1D6E0] px-4 py-2.5 text-[black] hover:bg-[#D6336C]/10"
                   >
                     <Moon size={18} />
                     {sleepLabel ?? "Hẹn giờ"}

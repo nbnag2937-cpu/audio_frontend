@@ -45,26 +45,24 @@ function PlayerBar({
   const [openMenu, setOpenMenu] = useState<OpenMenu>(null);
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-20 border-t border-white/10 bg-[#0D241F]/95 backdrop-blur">
+    <div className="fixed inset-x-0 bottom-0 z-20 border-t border-[#F1D6E0] bg-[#FFF3F7]/95 backdrop-blur">
       <div className="mx-auto flex w-full max-w-360 flex-col gap-2 px-3 py-2.5 sm:px-6 sm:py-3 md:px-8 lg:px-20 xl:px-70">
         <div className="min-w-0 sm:hidden">
-          <p className="truncate text-sm font-semibold text-[#F0FDF4]">
-            {title}
-          </p>
-          <p className="truncate text-xs text-[#F0FDF4]/50">{statusLabel}</p>
+          <p className="truncate text-sm font-semibold text-black">{title}</p>
+          <p className="truncate text-xs text-black/50">{statusLabel}</p>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-4">
           <div className="hidden min-w-0 flex-1 sm:block">
-            <p className="truncate font-semibold text-[#F0FDF4]">{title}</p>
-            <p className="truncate text-sm text-[#F0FDF4]/50">{statusLabel}</p>
+            <p className="truncate font-semibold text-black">{title}</p>
+            <p className="truncate text-sm text-black/50">{statusLabel}</p>
           </div>
 
           <div className="flex flex-1 items-center justify-center gap-2 sm:flex-none sm:justify-end sm:gap-3">
             <button
               type="button"
               onClick={onSkipPrev}
-              className="cursor-pointer text-[#F0FDF4]/70 hover:text-[#F0FDF4]"
+              className="cursor-pointer text-black/70 hover:text-black"
               aria-label="Về đầu tập"
             >
               <SkipBack size={20} />
@@ -73,7 +71,7 @@ function PlayerBar({
             <button
               type="button"
               onClick={onTogglePlay}
-              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-[#6ac1ab] text-[#0D241F] hover:bg-[#57ad98] sm:h-11 sm:w-11"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-[#D6336C] text-white hover:bg-[#AD1457] sm:h-11 sm:w-11"
               aria-label={isPlaying ? "Tạm dừng" : "Phát"}
             >
               {isPlaying ? <Pause size={20} /> : <Play size={20} />}
@@ -82,7 +80,7 @@ function PlayerBar({
             <button
               type="button"
               onClick={onSkipNext}
-              className="cursor-pointer text-[#F0FDF4]/70 hover:text-[#F0FDF4]"
+              className="cursor-pointer text-black/70 hover:text-black"
               aria-label="Audio tiếp theo"
             >
               <SkipForward size={20} />
@@ -96,7 +94,7 @@ function PlayerBar({
                     current === "speed" ? null : "speed",
                   )
                 }
-                className="flex cursor-pointer items-center gap-1 rounded-full border border-white/15 px-2.5 py-1 text-xs text-[#F0FDF4] sm:px-3 sm:py-1.5 sm:text-sm"
+                className="flex cursor-pointer items-center gap-1 rounded-full border border-[#F1D6E0] px-2.5 py-1 text-xs text-black sm:px-3 sm:py-1.5 sm:text-sm"
               >
                 <Gauge size={16} />
                 {playbackRate}x
@@ -120,7 +118,7 @@ function PlayerBar({
                     current === "sleep" ? null : "sleep",
                   )
                 }
-                className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-white/15 text-[#F0FDF4] sm:h-9 sm:w-9"
+                className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-[#F1D6E0] text-black sm:h-9 sm:w-9"
                 aria-label="Hẹn giờ đi ngủ"
               >
                 <Moon size={16} />
@@ -142,7 +140,7 @@ function PlayerBar({
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-xs text-[#F0FDF4]/60 sm:gap-3">
+        <div className="flex items-center gap-2 text-xs text-black/60 sm:gap-3">
           <span className="w-8 shrink-0 text-right sm:w-auto sm:text-left">
             {formatDuration(currentTime)}
           </span>
@@ -155,7 +153,7 @@ function PlayerBar({
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               onSeek(Number(e.target.value))
             }
-            className="h-1 flex-1 cursor-pointer accent-[#6ac1ab]"
+            className="h-1 flex-1 cursor-pointer accent-[#D6336C]"
           />
           <span className="w-8 shrink-0 sm:w-auto">
             {formatDuration(duration)}
@@ -164,7 +162,7 @@ function PlayerBar({
       </div>
 
       {sleepLabel && (
-        <p className="mx-auto w-full max-w-360 px-3 pb-2 text-xs text-[#6ac1ab] sm:px-6 md:px-8 lg:px-20 xl:px-70">
+        <p className="mx-auto w-full max-w-360 px-3 pb-2 text-xs text-[#D6336C] sm:px-6 md:px-8 lg:px-20 xl:px-70">
           Hẹn giờ: {sleepLabel}
         </p>
       )}

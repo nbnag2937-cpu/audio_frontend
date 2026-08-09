@@ -32,13 +32,13 @@ function AudioSectionWithSort(
             {AudioSectionWithSort.title}
           </h2>
           <div className="ts-sort flex gap-1">
-            <Button className="rounded-full bg-[#122F29] hover:bg-[#122F29] border-[#24453D] cursor-pointer">
+            <Button className="rounded-full bg-[#7A1140] hover:bg-[#7A1140] border-[#F1D6E0] cursor-pointer">
               Hôm nay
             </Button>
-            <Button className="rounded-full bg-[#122F29] hover:bg-[#122F29] border-[#24453D] cursor-pointer">
+            <Button className="rounded-full bg-[#7A1140] hover:bg-[#7A1140] border-[#F1D6E0] cursor-pointer">
               Tháng
             </Button>
-            <Button className="rounded-full bg-[#122F29] hover:bg-[#122F29] border-[#24453D] cursor-pointer">
+            <Button className="rounded-full bg-[#7A1140] hover:bg-[#7A1140] border-[#F1D6E0] cursor-pointer">
               Năm
             </Button>
           </div>
@@ -48,17 +48,17 @@ function AudioSectionWithSort(
             onClick={() => {
               scroll("left");
             }}
-            className="rounded-full bg-[#071A16] hover:bg-[#12302A] hover:border-[#24453D] duration-300 transition hover:scale-110  w-10 h-10 cursor-pointer"
+            className="rounded-full bg-[#FFEAF1] hover:bg-white hover:border-[#F1D6E0] duration-300 transition hover:scale-110  w-10 h-10 cursor-pointer"
           >
-            <ChevronLeft />
+            <ChevronLeft className="text-black" />
           </Button>
           <Button
             onClick={() => {
               scroll("right");
             }}
-            className="rounded-full bg-[#071A16] hover:bg-[#12302A] hover:border-[#24453D] duration-300 transition hover:scale-110 w-10 h-10 cursor-pointer"
+            className="rounded-full bg-[#FFEAF1] hover:bg-white hover:border-[#F1D6E0] duration-300 transition hover:scale-110 w-10 h-10 cursor-pointer"
           >
-            <ChevronRight />
+            <ChevronRight className="text-black" />
           </Button>
         </div>
       </div>
@@ -70,7 +70,7 @@ function AudioSectionWithSort(
           <div
             onClick={() => router.push(audio.id)}
             key={audio.id}
-            className="bg-[#12302A] rounded-xl shrink-0 w-60 p-3 border hover:border-[#458475] transition duration-400 border-[#24453D] flex flex-col gap-2 cursor-pointer"
+            className="bg-white rounded-xl shrink-0 w-60 p-3 border hover:border-[#D6336C] transition duration-400 border-[#F1D6E0] flex flex-col gap-2 cursor-pointer"
           >
             <h3 className="font-bold text-xl">{audio.title}</h3>
             <div className="border px-1 w-fit text-[10px] font-semibold">
@@ -85,7 +85,7 @@ function AudioSectionWithSort(
                 lượt nghe
               </span>
             </div>
-            <div className="flex items-center gap-1 text-[#befbd0]">
+            <div className="flex items-center gap-1 text-[#D6336C]">
               <span>●</span>
               <span className="text-xs">
                 {audio.totalListening >= 1000

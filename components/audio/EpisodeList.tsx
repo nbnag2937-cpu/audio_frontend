@@ -12,7 +12,7 @@ interface EpisodeListProps {
 function EpisodeList({ parts, activePartIndex, onPlayPart }: EpisodeListProps) {
   return (
     <section className="mt-6">
-      <h2 className="mb-3 text-lg font-bold text-[#F0FDF4]">
+      <h2 className="mb-3 text-lg font-bold text-black">
         Danh sách tập ({parts.length})
       </h2>
       <div className="flex flex-col gap-3">
@@ -25,24 +25,24 @@ function EpisodeList({ parts, activePartIndex, onPlayPart }: EpisodeListProps) {
               onClick={() => onPlayPart(index)}
               className={`flex cursor-pointer items-center gap-4 rounded-xl border px-4 py-3 text-left transition ${
                 isActive
-                  ? "border-[#6ac1ab] bg-[#6ac1ab]/15"
-                  : "border-white/10 bg-white/5 hover:bg-white/10"
+                  ? "border-[#D6336C] bg-[#D6336C]/12"
+                  : "border-[#F1D6E0] bg-white hover:bg-[#D6336C]/5"
               }`}
             >
               <span
-                className={`text-sm ${isActive ? "text-[#F0FDF4]" : "text-[#F0FDF4]/50"}`}
+                className={`text-sm ${isActive ? "text-black" : "text-black/50"}`}
               >
                 Phần {part.partNumber}
               </span>
               <span className="flex flex-1 flex-col">
                 <span
                   className={`font-semibold ${
-                    isActive ? "text-[#F0FDF4]" : "text-[#F0FDF4]/90"
+                    isActive ? "text-black" : "text-black/90"
                   }`}
                 >
                   {part.title}
                 </span>
-                <span className="text-sm text-[#F0FDF4]/50">
+                <span className="text-sm text-black/50">
                   {formatDuration(part.durationSec)}
                 </span>
               </span>
