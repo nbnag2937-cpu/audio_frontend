@@ -241,7 +241,11 @@ function HomePageClient() {
           <div className="ts-audio section mt-5 flex flex-col gap-10">
             <AudioSection title="Mới cập nhật" audio={newReleaseAudio} />
             <AudioSection title="Đang nghe nhiều" audio={trending} />
-            <AudioSectionWithSort title="Top lượt nghe" audio={topListened} />
+            <AudioSectionWithSort
+              title="Top lượt nghe"
+              metric="listened"
+              limit={10}
+            />
             <AllAudioSection />
           </div>
         )}
