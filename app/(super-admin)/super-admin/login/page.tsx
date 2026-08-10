@@ -15,7 +15,7 @@ export default async function SuperAdminLoginPage({
           Đăng nhập Super Admin
         </h1>
         <p className="mb-6 text-sm text-zinc-400">
-          Quản trị toàn bộ hệ thống Yêu Đời Audio
+          Quản trị toàn bộ hệ thống Audio Không Quảng Cáo
         </p>
 
         {forbidden && (

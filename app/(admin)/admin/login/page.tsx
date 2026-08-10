@@ -13,7 +13,7 @@ export default async function AdminLoginPage({
       <div className="w-full max-w-sm">
         <h1 className="mb-1 text-2xl font-bold text-white">Đăng nhập Admin</h1>
         <p className="mb-6 text-sm text-zinc-400">
-          Quản lý audio của bạn trên Yêu Đời Audio
+          Quản lý audio của bạn trên Audio Không Quảng Cáo
         </p>
 
         {forbidden && (

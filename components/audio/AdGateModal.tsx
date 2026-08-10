@@ -97,8 +97,8 @@ function AdGateModal({ shopeeUrl, onUnlock, onClose }: AdGateModalProps) {
         </a>
 
         <p className="mt-4 text-center text-sm text-black/60">
-          Quảng cáo giúp Yêu Đời Audio luôn miễn phí — mở khóa là nghe được
-          ngay.
+          Quảng cáo giúp Audio Không Quảng Cáo luôn miễn phí — mở khóa là nghe
+          được ngay.
         </p>
 
         <div className="mt-3 rounded-xl border border-[#D6336C]/30 bg-[#D6336C]/10 p-3 text-sm text-black">

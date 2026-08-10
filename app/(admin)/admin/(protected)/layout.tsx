@@ -33,7 +33,7 @@ export default async function AdminProtectedLayout({
 
   return (
     <AuthShell
-      title="Yêu Đời Audio · Admin"
+      title="Audio Không Quảng Cáo · Admin"
       userLabel={account.email}
       navItems={NAV_ITEMS}
       logoutAction={logoutAdminAction}

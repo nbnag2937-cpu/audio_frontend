@@ -8,7 +8,7 @@ export default async function SuperAdminDashboardPage() {
     <div>
       <h1 className="text-2xl font-bold text-white">Tổng quan hệ thống</h1>
       <p className="mt-1 text-sm text-zinc-400">
-        Số liệu toàn bộ nền tảng Yêu Đời Audio
+        Số liệu toàn bộ nền tảng Audio Không Quảng Cáo
       </p>
 
       {/* Cac field ben duoi (totalAdmins, totalAudios, totalListened, totalListening) la du doan

@@ -9,8 +9,10 @@ function page() {
         <div className="mx-auto flex w-full max-w-360 flex-col gap-5 px-4 py-5 sm:px-6 md:px-8 lg:px-20 xl:px-70">
           <h1 className="text-4xl font-bold">Giới thiệu</h1>
           <span className="text-black/70">
-            <span className="font-bold text-[#7A1140]">Yêu Đời Audio</span> là
-            nền tảng{" "}
+            <span className="font-bold text-[#7A1140]">
+              Audio Không Quảng Cáo
+            </span>{" "}
+            là nền tảng{" "}
             <span className="font-bold text-[#7A1140]">
               nghe audio trực tuyến miễn phí
             </span>
@@ -51,7 +53,7 @@ function page() {
             >
               Liên hệ
             </a>
-            . Khi sử dụng Yêu Đời Audio, bạn đồng ý với{" "}
+            . Khi sử dụng Audio Không Quảng Cáo, bạn đồng ý với{" "}
             <a
               href="dieu-khoan-su-dung"
               className="text-[#D6336C] hover:underline cursor-pointer"

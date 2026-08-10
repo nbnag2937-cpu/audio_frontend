@@ -13,9 +13,11 @@ function page() {
           </span>
           <span>
             Bằng việc truy cập và sử dụng{" "}
-            <span className="text-[#7A1140] font-bold">Yêu Đời Audio</span>, bạn
-            đồng ý tuân thủ các điều khoản dưới đây. Nếu không đồng ý, vui lòng
-            ngừng sử dụng website.
+            <span className="text-[#7A1140] font-bold">
+              Audio Không Quảng Cáo
+            </span>
+            , bạn đồng ý tuân thủ các điều khoản dưới đây. Nếu không đồng ý, vui
+            lòng ngừng sử dụng website.
           </span>
           <h2 className="text-2xl font-bold">1. Chấp nhận điều khoản</h2>
           <span className="text-black/70">
@@ -70,24 +72,14 @@ function page() {
           </span>
           <h2 className="text-2xl font-bold">7. Giới hạn trách nhiệm</h2>
           <span className="text-black/70">
-            Trong phạm vi pháp luật cho phép, Yêu Đời Audio không chịu trách
-            nhiệm cho bất kỳ thiệt hại gián tiếp hay phát sinh nào từ việc sử
-            dụng hoặc không thể sử dụng website.
+            Trong phạm vi pháp luật cho phép, Audio Không Quảng Cáo không chịu
+            trách nhiệm cho bất kỳ thiệt hại gián tiếp hay phát sinh nào từ việc
+            sử dụng hoặc không thể sử dụng website.
           </span>
           <h2 className="text-2xl font-bold">8. Thay đổi điều khoản</h2>
           <span className="text-black/70">
             Chúng tôi có thể cập nhật điều khoản bất cứ lúc nào. Phiên bản mới
             có hiệu lực ngay khi đăng tải.
-          </span>
-          <h2 className="text-2xl font-bold">9. Liên hệ</h2>
-          <span className="text-black/70">
-            Mọi câu hỏi về điều khoản, vui lòng liên hệ{" "}
-            <a
-              className="text-[#D6336C] hover:underline cursor-pointer"
-              href="mailto:hoa.bi.ngan79vxh@gmail.com"
-            >
-              hoa.bi.ngan79vxh@gmail.com.
-            </a>
           </span>
         </div>
       </div>

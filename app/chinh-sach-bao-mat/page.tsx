@@ -13,10 +13,12 @@ function page() {
           </span>
           <span>
             Trang{" "}
-            <span className="text-[#7A1140] font-bold">Yêu Đời Audio</span> tôn
-            trọng quyền riêng tư của bạn. Chính sách này giải thích chúng tôi
-            thu thập, sử dụng và bảo vệ thông tin như thế nào khi bạn truy cập
-            website.
+            <span className="text-[#7A1140] font-bold">
+              Audio Không Quảng Cáo
+            </span>{" "}
+            tôn trọng quyền riêng tư của bạn. Chính sách này giải thích chúng
+            tôi thu thập, sử dụng và bảo vệ thông tin như thế nào khi bạn truy
+            cập website.
           </span>
           <h2 className="text-2xl font-bold">
             1. Thông tin chúng tôi thu thập
@@ -131,13 +133,7 @@ function page() {
           <h2 className="text-2xl font-bold">8. Quyền của bạn</h2>
           <span className="text-black/70">
             Bạn có thể yêu cầu xem, chỉnh sửa hoặc xoá dữ liệu cá nhân, cũng như
-            xoá tài khoản, bằng cách liên hệ{" "}
-            <a
-              className="text-[#D6336C] hover:underline cursor-pointer"
-              href="mailto:hoa.bi.ngan79vxh@gmail.com"
-            >
-              hoa.bi.ngan79vxh@gmail.com.
-            </a>
+            xoá tài khoản, bằng cách liên hệ
           </span>
           <h2 className="text-2xl font-bold">9. Quyền riêng tư của trẻ em</h2>
           <span className="text-black/70">
@@ -149,16 +145,6 @@ function page() {
           <span className="text-black/70">
             Chính sách này có thể được cập nhật theo thời gian. Mọi thay đổi sẽ
             được đăng tại trang này kèm ngày cập nhật mới.
-          </span>
-          <h2 className="text-2xl font-bold">11. Liên hệ</h2>
-          <span className="text-black/70">
-            Nếu có thắc mắc về chính sách bảo mật, vui lòng liên hệ:{" "}
-            <a
-              className="text-[#D6336C] hover:underline cursor-pointer"
-              href="mailto:hoa.bi.ngan79vxh@gmail.com"
-            >
-              hoa.bi.ngan79vxh@gmail.com.
-            </a>
           </span>
         </div>
       </div>

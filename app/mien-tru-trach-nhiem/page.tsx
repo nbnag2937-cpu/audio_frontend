@@ -16,10 +16,12 @@ function page() {
           <h2 className="text-2xl font-bold">Miễn trừ trách nhiệm</h2>
           <span className="text-black/70">
             Nội dung trên{" "}
-            <span className="font-bold text-[#7A1140]">Yêu Đời Audio</span> được
-            cung cấp nhằm mục đích giải trí và tham khảo cá nhân. Chúng tôi nỗ
-            lực bảo đảm thông tin chính xác nhưng không cam kết về tính đầy đủ,
-            kịp thời hay phù hợp cho một mục đích cụ thể nào.
+            <span className="font-bold text-[#7A1140]">
+              Audio Không Quảng Cáo
+            </span>{" "}
+            được cung cấp nhằm mục đích giải trí và tham khảo cá nhân. Chúng tôi
+            nỗ lực bảo đảm thông tin chính xác nhưng không cam kết về tính đầy
+            đủ, kịp thời hay phù hợp cho một mục đích cụ thể nào.
           </span>
           <span className="text-black/70">
             Website có thể chứa quảng cáo và liên kết đến bên thứ ba. Chúng tôi
@@ -34,14 +36,7 @@ function page() {
             Chúng tôi tôn trọng quyền sở hữu trí tuệ và mong muốn xử lý nhanh
             các khiếu nại bản quyền hợp lệ. Nếu bạn là chủ sở hữu (hoặc đại diện
             hợp pháp) và cho rằng một nội dung trên website vi phạm bản quyền
-            của bạn, vui lòng gửi email tới{" "}
-            <a
-              className="text-[#D6336C] hover:underline cursor-pointer"
-              href="mailto:hoa.bi.ngan79vxh@gmail.com"
-            >
-              hoa.bi.ngan79vxh@gmail.com
-            </a>{" "}
-            kèm các thông tin:
+            của bạn kèm các thông tin:
           </span>
           <span className="text-black/70">
             ● Thông tin liên hệ của bạn (họ tên, email, số điện thoại nếu có).
@@ -61,8 +56,8 @@ function page() {
             <span className="font-bold text-[#7A1140]">
               gỡ bỏ nội dung vi phạm trong thời gian sớm nhất
             </span>{" "}
-            (thường trong vòng 48–72 giờ làm việc). Cảm ơn bạn đã giúp Yêu Đời
-            Audio tuân thủ đúng quy định về bản quyền.
+            (thường trong vòng 48–72 giờ làm việc). Cảm ơn bạn đã giúp Audio
+            Không Quảng Cáo tuân thủ đúng quy định về bản quyền.
           </span>
         </div>
       </div>

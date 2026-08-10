@@ -34,7 +34,7 @@ export default async function SuperAdminProtectedLayout({
 
   return (
     <AuthShell
-      title="Yêu Đời Audio · Super Admin"
+      title="Audio Không Quảng Cáo · Super Admin"
       userLabel={account.email}
       navItems={NAV_ITEMS}
       logoutAction={logoutSuperAdminAction}

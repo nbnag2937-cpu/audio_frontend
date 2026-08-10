@@ -12,19 +12,8 @@ function page() {
           <span className="text-black/70">
             Rất mong nhận được phản hồi từ bạn. Nếu có câu hỏi, góp ý, đề nghị
             hợp tác quảng cáo hoặc yêu cầu liên quan đến bản quyền, hãy liên hệ
-            với đội ngũ{" "}
-            <span className="text-black/70 font-bold">Yêu Đời Audio</span> qua
-            email:
+            với đội ngũ
           </span>
-          <div className="flex items-center gap-1">
-            <Mail />
-            <a
-              className="text-[#D6336C] hover:underline cursor-pointer"
-              href="mailto:hoa.bi.ngan79vxh@gmail.com"
-            >
-              hoa.bi.ngan79vxh@gmail.com
-            </a>{" "}
-          </div>
 
           <h2 className="text-2xl font-bold">Chúng tôi hỗ trợ những gì</h2>
           <span className="text-black/70">
@@ -49,7 +38,7 @@ function page() {
           <span className="text-black/70">
             Chúng tôi cố gắng phản hồi trong vòng{" "}
             <span className="text-black/70 font-bold">3–5 ngày làm việc</span>.
-            Cảm ơn bạn đã đồng hành cùng Yêu Đời Audio.
+            Cảm ơn bạn đã đồng hành cùng Audio Không Quảng Cáo.
           </span>
         </div>
       </div>
