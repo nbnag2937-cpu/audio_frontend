@@ -129,7 +129,7 @@ function AllAudioSection() {
                 </Button>
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-3">
-                    <h3 className="font-bold text-xl truncate">
+                    <h3 className="font-bold text-md truncate">
                       {audio.title}
                     </h3>
                     <div className="border px-1 w-fit text-[10px] font-semibold">
