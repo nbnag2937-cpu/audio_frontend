@@ -23,7 +23,7 @@ function Footer() {
         </Link>
       </div>
       <span className="text-sm">
-        © 2026 Yêu đời Audio. Nghe audio trực tuyến miễn phí.
+        © 2026 Không Quảng Cáo Audio. Nghe audio trực tuyến miễn phí.
       </span>
     </div>
   );

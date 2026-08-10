@@ -8,7 +8,7 @@ function Header() {
     <div className="py-5 px-3 bg-[#FFEAF1] flex items-center gap-2">
       <Image src={"/logo.svg"} alt="logo" width={30} height={30} priority />
       <Link href={"/"} className="font-bold text-xl text-[#D6336C]">
-        Yêu Đời Audio
+        Không Quảng Cáo Audio
       </Link>
     </div>
   );
