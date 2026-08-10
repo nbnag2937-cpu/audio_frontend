@@ -33,6 +33,7 @@ function AudioFormModalContent({
   onSaved,
 }: AudioFormModalProps) {
   const isEdit = audio !== null;
+  // Tao moi: khong nhap title, BE se tu sinh "Audio N". Chi giu state cho che do sua.
   const [title, setTitle] = useState(audio?.title ?? "");
   const [description, setDescription] = useState(audio?.description ?? "");
   const [adLinkUrl, setAdLinkUrl] = useState(audio?.adLinkUrl ?? "");
@@ -55,11 +56,11 @@ function AudioFormModalContent({
         }
         const formData = new FormData();
         formData.set("audioFile", file);
-        formData.set("title", title);
         formData.set("description", description);
         if (adLinkUrl) {
           formData.set("adLinkUrl", adLinkUrl);
         }
+        // Khong append "title" nua - BE se tu sinh dang "Audio N"
         await createAction(formData);
       }
       onSaved();
@@ -79,14 +80,16 @@ function AudioFormModalContent({
       onClose={onClose}
     >
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="mb-1 block text-sm text-zinc-400">Tiêu đề</label>
-          <Input
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-            required
-          />
-        </div>
+        {isEdit && (
+          <div>
+            <label className="mb-1 block text-sm text-zinc-400">Tiêu đề</label>
+            <Input
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+              required
+            />
+          </div>
+        )}
         <div>
           <label className="mb-1 block text-sm text-zinc-400">Mô tả</label>
           <Textarea
