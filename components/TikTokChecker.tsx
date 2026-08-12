@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const TIKTOK_UA_PATTERN = /musical_ly|tiktok/i;
+const TIKTOK_UA_PATTERN = /musical_ly|tiktok|trill|aweme|bytedance/i;
 
 function isTikTokInAppBrowser(): boolean {
   if (typeof window === "undefined") return false;
