@@ -33,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <TikTokChecker />
           {children}
           {/* TAM THOI de debug UA tren dien thoai - XOA dong nay sau khi xong */}
-          <DebugUaBadge />
+          {/* <DebugUaBadge /> */}
         </body>
       </html>
     </>
