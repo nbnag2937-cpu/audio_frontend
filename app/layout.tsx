@@ -22,11 +22,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${sansFont.variable} ${monoFont.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
-    </html>
+    <>
+      <html
+        lang="en"
+        className={`${sansFont.variable} ${monoFont.variable} h-full antialiased`}
+      >
+        <body className="min-h-full flex flex-col">{children}</body>
+      </html>
+    </>
   );
 }

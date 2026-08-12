@@ -386,7 +386,7 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
                 </span>
                 <span className="flex items-center gap-1 text-[black]/60">
                   <Headphones size={14} />
-                  {formatListenCount(audio.totalListened)} lượt nghe
+                  {formatListenCount(audio.totalListening)} lượt nghe
                 </span>
               </div>
 
