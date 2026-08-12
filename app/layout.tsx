@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro, Space_Mono } from "next/font/google";
 import "./globals.css";
+import TikTokChecker from "@/components/TikTokChecker";
+import DebugUaBadge from "./debug-ua/debuguabadge";
 
 const sansFont = Be_Vietnam_Pro({
   weight: ["400", "500", "600", "700"],
@@ -27,7 +29,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         lang="en"
         className={`${sansFont.variable} ${monoFont.variable} h-full antialiased`}
       >
-        <body className="min-h-full flex flex-col">{children}</body>
+        <body className="min-h-full flex flex-col">
+          <TikTokChecker />
+          {children}
+          {/* TAM THOI de debug UA tren dien thoai - XOA dong nay sau khi xong */}
+          <DebugUaBadge />
+        </body>
       </html>
     </>
   );
