@@ -144,7 +144,7 @@ function RankedAudioList({
         <div
           onClick={() => onItemClick(audio.id)}
           key={audio.id}
-          className="bg-white rounded-xl shrink-0 w-60 p-3 border hover:border-[#D6336C] transition duration-400 border-[#F1D6E0] flex flex-col gap-2 cursor-pointer"
+          className="bg-white rounded-xl shrink-0 w-65 px-3 py-4 border hover:border-[#D6336C] transition duration-400 border-[#F1D6E0] flex flex-col gap-2 cursor-pointer"
         >
           <h3 className="font-bold text-md truncate">{audio.title}</h3>
           <div className="border px-1 w-fit text-[10px] font-semibold">

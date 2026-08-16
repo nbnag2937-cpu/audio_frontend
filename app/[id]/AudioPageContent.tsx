@@ -384,10 +384,15 @@ function AudioPageContent({ audioId }: AudioPageContentProps) {
                 <span className="rounded-full bg-[#D6336C]/12 px-2 py-0.5 text-xs text-[#D6336C]">
                   {audio.status === "ready" ? "sẵn sàng" : "đang xử lý"}
                 </span>
-                <span className="flex items-center gap-1 text-[black]/60">
-                  <Headphones size={14} />
-                  {formatListenCount(audio.totalListening)} lượt nghe
-                </span>
+                <div className="flex items-center gap-1 text-[#D6336C]">
+                  <span>●</span>
+                  <span className="text-xs">
+                    {audio.currentListeners >= 1000
+                      ? `${(audio.currentListeners / 1000).toFixed(1)}N`
+                      : audio.currentListeners}{" "}
+                    đang nghe
+                  </span>
+                </div>
               </div>
 
               <span className="text-sm text-[black]/50">
