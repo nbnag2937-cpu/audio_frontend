@@ -26,13 +26,19 @@ function AdGateModal({ shopeeUrl, onUnlock, onClose }: AdGateModalProps) {
     });
 
     fetch(`/api/og-preview?url=${encodeURIComponent(shopeeUrl)}`)
-      .then((res) => res.json())
+      .then((res) => {
+        // console.log("[og-preview] status:", res.status, res.ok);
+        return res.json();
+      })
       .then((data) => {
+        // console.log("[og-preview] response data:", data);
         if (isMounted && data.imageUrl) {
           setImageUrl(data.imageUrl);
         }
       })
-      .catch(() => {})
+      .catch((err) => {
+        // console.error("[og-preview] fetch error:", err);
+      })
       .finally(() => {
         if (isMounted) setIsFetching(false);
       });

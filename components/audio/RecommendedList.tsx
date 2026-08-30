@@ -65,11 +65,11 @@ function RecommendedList({ items }: RecommendedListProps) {
             </h3>
             <div className="mt-2 flex items-center gap-1 text-xs text-black/60">
               <Headphones size={14} />
-              {formatListenCount(item.totalListened)} lượt nghe
+              {formatListenCount(item.totalListening)} lượt nghe
             </div>
             <div className="mt-1 flex items-center gap-1 text-xs text-[#D6336C]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#D6336C]" />
-              {item.totalListening} đang nghe
+              {item.currentListeners} đang nghe
             </div>
           </Link>
         ))}
