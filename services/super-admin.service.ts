@@ -34,6 +34,7 @@ export interface SystemStats {
   totalAudios: number;
   totalListening: number;
   totalListened: number;
+  currentListeners: number;
 }
 
 export interface AudioWithOwner extends AudioItem {

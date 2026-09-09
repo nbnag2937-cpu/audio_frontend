@@ -8,7 +8,7 @@ export default async function AdminDashboardPage() {
     0,
   );
   const totalListening = audios.reduce(
-    (sum, audio) => sum + audio.totalListening,
+    (sum, audio) => sum + audio.currentListeners,
     0,
   );
   const readyCount = audios.filter((audio) => audio.status === "ready").length;

@@ -1,8 +1,18 @@
 import { getSystemStatsAction } from "@/actions/super-admin.actions";
 import StatCard from "@/components/ui/StatCard";
+import { getAllAudio } from "@/services/audio.service";
 
 export default async function SuperAdminDashboardPage() {
   const stats = await getSystemStatsAction();
+  const audios = await getAllAudio();
+  audios.forEach((item) => {
+    console.log(item.currentListeners);
+  });
+
+  const totalListening = audios.reduce(
+    (sum, audio) => sum + audio.currentListeners,
+    0,
+  );
 
   return (
     <div>
@@ -18,7 +28,7 @@ export default async function SuperAdminDashboardPage() {
         <StatCard label="Tổng số Admin" value={stats.totalAdmins} />
         <StatCard label="Tổng số Audio" value={stats.totalAudios} />
         <StatCard label="Tổng lượt nghe" value={stats.totalListened} />
-        <StatCard label="Đang nghe" value={stats.totalListening} />
+        <StatCard label="Đang nghe" value={totalListening} />
       </div>
     </div>
   );

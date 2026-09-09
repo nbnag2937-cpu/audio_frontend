@@ -117,8 +117,8 @@ export default function AudioManager({
                   <td className="px-4 py-3">
                     <StatusBadge status={audio.status} />
                   </td>
-                  <td className="px-4 py-3">{audio.totalListened}</td>
                   <td className="px-4 py-3">{audio.totalListening}</td>
+                  <td className="px-4 py-3">{audio.currentListeners}</td>
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-2">
                       <Button
