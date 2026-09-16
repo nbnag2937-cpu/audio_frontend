@@ -11,7 +11,7 @@ interface PageProps {
 }
 
 const SITE_NAME = "Audio Không Quảng Cáo";
-const SITE_URL = "https://audiokhongquangcao.site";
+const SITE_URL = "https://www.audiokhongquangcao.site";
 
 export async function generateMetadata({
   params,

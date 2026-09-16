@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Be_Vietnam_Pro, Space_Mono } from "next/font/google";
 import "./globals.css";
 import TikTokChecker from "@/components/TikTokChecker";
-import DebugUaBadge from "./debug-ua/debuguabadge";
 
 const sansFont = Be_Vietnam_Pro({
   weight: ["400", "500", "600", "700"],
